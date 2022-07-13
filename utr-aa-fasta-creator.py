@@ -89,9 +89,9 @@ def na_parse(utr_coords, cds_coords, label):
             clean_coords = []
             for index, c in enumerate(utr_coords):
                 if c == None:
-                    clean_coords[index] = backup_coords[index]
+                    clean_coords.append(backup_coords[index])
                 else:
-                    clean_coords[index] = c
+                    clean_coords.append(c)
             return clean_coords
     else:
         return utr_coords
@@ -196,8 +196,8 @@ for i, line in enumerate(cds_coord_file):
 
     # create FASTA entries based on those UTRs
     fiveprime = genome[utrs[0]:cds_coords[0]-1]
-    cds = genome[cds_coords[0]-1:cds_coords[1]+1]
-    threeprime = genome[cds_coords[1]+1:utrs[1]]
+    cds = genome[cds_coords[0]-1:cds_coords[1]]
+    threeprime = genome[cds_coords[1]:utrs[1]]
 
     if rev:
         orig_fiveprime = fiveprime
